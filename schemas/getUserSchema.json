@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "message": "El nombre es obligatorio y debe tener entre 1 y 100 caracteres"
+      },
+      "last_name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "message": "El apellido es obligatorio y debe tener entre 1 y 100 caracteres"
+      },
+      "email": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "format": "email",
+        "pattern": "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+        "message": "El email es obligatorio y debe tener entre 1 y 100 caracteres"
+      }
+    },
+    "required": ["name", "last_name", "email"],
+    "additionalProperties": false
+  }
+  

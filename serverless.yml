@@ -1,0 +1,44 @@
+service: lambda-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  # enabled cors not recomended, you should use middleware
+  httpApi:
+    cors: true
+
+plugins:
+  - serverless-localstack
+  - serverless-offline
+
+package:
+  individually: true
+  patterns:
+    # exclude all package
+    - "!*/**"
+    # Example do not exclude the plugin - 'node_modules/node-fetch/**'
+    # example not to exclude file from the path - 'src/function/handler.js'
+
+custom:
+  localstack:
+    debug: true
+    stages:
+      - local
+      - dev
+    endpointFile: localstack_endpoints.json
+
+functions:
+  user:
+    handler: src/users/getUser/handler.getUser
+    package:
+      patterns:
+        - "src/users/getUser/handler.js"
+    events:
+      - httpApi:
+          path: /getUser
+          method: GET
+          # request:
+          #   schema:
+          #     'application/json': ${file(schemas/getUserSchema.json)}
+          
